@@ -4,6 +4,27 @@ using UnityEngine;
 
 public class BlockFallAnimation : MonoBehaviour {
 
+    public IEnumerator Fall(Vector2 distance)
+    {
+
+        this.transform.Translate(distance, Space.World);
+        Vector3 xshrink = new Vector2(-0.1f, 0f);
+        Vector3 yshrink = new Vector2(0f, -0.1f);
+
+        while (this.transform.localScale.x > 0)
+        {
+            this.transform.localScale += xshrink;
+            yield return new WaitForSecondsRealtime(.02f);
+            if (this.transform.localScale.x <= 0.5f)
+            {
+                this.transform.localScale += yshrink;
+            }
+        }
+
+        this.gameObject.SetActive(false);
+    }
+
+
     /*private Sprite blockSprite;
 
 	void Start () 
@@ -52,22 +73,4 @@ public class BlockFallAnimation : MonoBehaviour {
         //Override the geometry with the new vertices
         blockSprite.OverrideGeometry(spriteVertices, blockSprite.triangles);
     }*/
-
-    public IEnumerator Fall(Vector2 distance)
-    {
-
-        this.transform.Translate(distance, Space.World);
-        Vector3 xshrink = new Vector2(-0.1f, 0f);
-        Vector3 yshrink = new Vector2(0f, -0.1f);
-
-        while(this.transform.localScale.x > 0){
-            this.transform.localScale += xshrink;
-            yield return new WaitForSecondsRealtime(.02f);
-            if(this.transform.localScale.x <=0.5f){
-                this.transform.localScale += yshrink;
-            }
-        }
-
-        this.gameObject.SetActive(false);
-    }
 }

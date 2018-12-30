@@ -2,28 +2,28 @@
 // GameState sahip On ana ekran da, Start oyun oynarken, Over da bitiş ekranı
 public class GameHandler {
 
-    public GameState game;
+    public GameState state;
 
     public enum GameState
     {
-        Start,
-        On,
-        Over
+        BeginingPage,
+        GameRunning,
+        GameOver
     };
 
-    public GameHandler(GameState state)
+    public GameHandler(GameState currState)
     {
-        game = state;
+        state = currState;
     }
 
     public void GameOver()
     {
-        game = GameState.Over;
+        state = GameState.GameOver;
         Platform.instance.runner.GetComponent<Runner>().enabled = false;
     }
     public void StartGame()
     {
-        game = GameState.Start;
+        state = GameState.GameRunning;
     }
 
 }

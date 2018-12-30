@@ -14,6 +14,15 @@ public class CameraMovement : MonoBehaviour {
 
 	void LateUpdate () 
     {
+       // Camera.main.orthographicSize += .1f;
         transform.position = Platform.instance.runner.transform.position + offset;
 	}
+
+    IEnumerator DynamicCamMovement()
+    {
+       // if(Platform.instance.platfotmTiles[Platform.instance.blockToSlide].transform.position.y > )
+
+        yield return null;
+    }
+
 }

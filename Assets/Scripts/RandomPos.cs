@@ -8,7 +8,7 @@ public static class RandomPos
     {
         int randomIndex = Random.Range(0, 2);
 
-        if (exRandom == randomIndex && samenumb >= 1)
+        if (exRandom == randomIndex && samenumb >= 4)
         {
             if (randomIndex == 0)
             {

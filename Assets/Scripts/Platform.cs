@@ -36,14 +36,18 @@ public class Platform : MonoBehaviour
     private void Awake()
     {
         Application.targetFrameRate = 60;
-        instance = this;
+
+        if(instance == null)
+        {
+            instance = this;
+        }
     }
 
     private void Start()
     {
         ınput = new InputManager();
 
-        game = new GameHandler(GameHandler.GameState.On);
+        game = new GameHandler(GameHandler.GameState.BeginingPage);
 
         block = this.transform.GetChild(0).gameObject;
         runner = GameObject.FindWithTag("Runner");
@@ -62,7 +66,7 @@ public class Platform : MonoBehaviour
         distance += 1.5f;
         platfotmTiles[platfotmTiles.Count - 1].transform.position = new Vector2(0f, distance);
 
-        blockNum = 8;
+        blockNum = 15;
 
         for (int i = 0; i < blockNum; i++)
         {
@@ -73,13 +77,23 @@ public class Platform : MonoBehaviour
         pushBlockForward = 0;
     }
 
-    // runner bloktan öndeyse bloğu ileri at + lines ı bir ileri taşı
+    //runner bloktan öndeyse bloğu ileri at + lines ı bir ileri taşı
     private void LateUpdate()
     {
         if(runner.transform.position.y >= platfotmTiles[pushBlockForward].transform.position.y + 3f)
         {
             lines.transform.position = new Vector2(0f, runner.transform.position.y + 3);
             platfotmTiles[pushBlockForward].transform.position = BlockPositioner(1.5f);
+
+            int r = Random.Range(0, 10);
+            //Debug.Log(r);
+
+            if (platfotmTiles[pushBlockForward].GetComponent<BlockType>().type == BlockData.blockType.reverse)
+                platfotmTiles[pushBlockForward].GetComponent<BlockType>().ChangeType();
+            //TODO: Create a random reverse generator that deals reverse positions 
+            else if (r < 2)
+                platfotmTiles[pushBlockForward].GetComponent<BlockType>().ChangeType();
+
             pushBlockForward = (pushBlockForward + 1 < platfotmTiles.Count) ? pushBlockForward += 1 : pushBlockForward = 0;
         }
     }
@@ -87,7 +101,7 @@ public class Platform : MonoBehaviour
     // kaycak bloğa karar ver, input al, input varsa ona göre haraket et
     private void Update()
     {
-        if(game.game == GameHandler.GameState.Start)
+        if(game.state == GameHandler.GameState.GameRunning)
         {
             if (Mathf.Approximately(platfotmTiles[blockToSlide].transform.position.x, 0f))
             {
@@ -99,34 +113,70 @@ public class Platform : MonoBehaviour
             if (ınput.directions.Count != 0)
             {
                 ınput.dirr = ınput.directions.Dequeue();
+
+                if(platfotmTiles[blockToSlide].GetComponent<BlockType>().type == BlockData.blockType.normal)
+                {
                 if (ınput.dirr == InputManager.direction.right)
-                {
-                    if (Mathf.Approximately(platfotmTiles[blockToSlide].transform.position.x, BlockPos[1]))
                     {
-                        platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x - 1.5f, platfotmTiles[blockToSlide].transform.position.y);
+                        if (Mathf.Approximately(platfotmTiles[blockToSlide].transform.position.x, BlockPos[1]))
+                        {
+                            platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x - 1.5f, platfotmTiles[blockToSlide].transform.position.y);
+                        }
+                        else
+                        {
+                            game.GameOver();
+                            StartCoroutine(platfotmTiles[blockToSlide].GetComponent<BlockFallAnimation>().Fall(new Vector2(-1f, 0)));
+                            var uı = (UIHandler)FindObjectOfType(typeof(UIHandler));
+                            uı.GameOver();
+                        }
                     }
-                    else
+                    else if (ınput.dirr == InputManager.direction.left)
                     {
-                        game.GameOver();
-                        StartCoroutine(platfotmTiles[blockToSlide].GetComponent<BlockFallAnimation>().Fall(new Vector2(-1f,0)));
-                        var uı = (UIHandler)FindObjectOfType(typeof(UIHandler));
-                        uı.GameOver();
+                        if (Mathf.Approximately(platfotmTiles[blockToSlide].transform.position.x, BlockPos[0]))
+                        {
+                            platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x + 1.5f, platfotmTiles[blockToSlide].transform.position.y);
+                        }
+                        else
+                        {
+                            game.GameOver();
+                            StartCoroutine(platfotmTiles[blockToSlide].GetComponent<BlockFallAnimation>().Fall(new Vector2(1f, 0)));
+                            var uı = (UIHandler)FindObjectOfType(typeof(UIHandler));
+                            uı.GameOver();
+                        }
                     }
                 }
-                else if (ınput.dirr == InputManager.direction.left)
+                else
                 {
-                    if (Mathf.Approximately(platfotmTiles[blockToSlide].transform.position.x, BlockPos[0]))
+                    if (ınput.dirr == InputManager.direction.right)
                     {
-                        platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x + 1.5f, platfotmTiles[blockToSlide].transform.position.y);
+                        if (Mathf.Approximately(platfotmTiles[blockToSlide].transform.position.x, BlockPos[0]))
+                        {
+                            platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x + 1.5f, platfotmTiles[blockToSlide].transform.position.y);
+                        }
+                        else
+                        {
+                            game.GameOver();
+                            StartCoroutine(platfotmTiles[blockToSlide].GetComponent<BlockFallAnimation>().Fall(new Vector2(1f, 0)));
+                            var uı = (UIHandler)FindObjectOfType(typeof(UIHandler));
+                            uı.GameOver();
+                        }
                     }
-                    else
+                    else if (ınput.dirr == InputManager.direction.left)
                     {
-                        game.GameOver();
-                        StartCoroutine(platfotmTiles[blockToSlide].GetComponent<BlockFallAnimation>().Fall(new Vector2(1f,0)));
-                        var uı = (UIHandler)FindObjectOfType(typeof(UIHandler));
-                        uı.GameOver();
+                        if (Mathf.Approximately(platfotmTiles[blockToSlide].transform.position.x, BlockPos[1]))
+                        {
+                            platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x - 1.5f, platfotmTiles[blockToSlide].transform.position.y);
+                        }
+                        else
+                        {
+                            game.GameOver();
+                            StartCoroutine(platfotmTiles[blockToSlide].GetComponent<BlockFallAnimation>().Fall(new Vector2(-1f, 0)));
+                            var uı = (UIHandler)FindObjectOfType(typeof(UIHandler));
+                            uı.GameOver();
+                        }
                     }
                 }
+
             }
         }
     }
