@@ -15,6 +15,8 @@ public class Platform : MonoBehaviour
     private GameObject block; //kırmızı bloklar
     public GameObject runner;
     public GameObject lines;
+	private GameObject road;
+	public GameObject background;
 
     public List<GameObject> platfotmTiles; //blokları barındıran liste
 
@@ -45,11 +47,15 @@ public class Platform : MonoBehaviour
 
         game = new GameHandler(GameHandler.GameState.On);
 
-        block = this.transform.GetChild(0).gameObject;
+		block = GameObject.FindWithTag("Block");
         runner = GameObject.FindWithTag("Runner");
-        lines = this.transform.GetChild(1).gameObject;
+		lines = GameObject.FindWithTag("Lines");
+		road = GameObject.FindWithTag("Road");
+		background = GameObject.FindWithTag("Background");
 
         lines.transform.position = new Vector2(0f, runner.transform.position.y + 7);
+		road.transform.position = new Vector2(0f, runner.transform.position.y + 7);
+		background.transform.position = new Vector2(0f, runner.transform.position.y + 7);
 
         platfotmTiles = new List<GameObject>();
         platfotmTiles.Add(block);
@@ -79,6 +85,9 @@ public class Platform : MonoBehaviour
         if(runner.transform.position.y >= platfotmTiles[pushBlockForward].transform.position.y + 3f)
         {
             lines.transform.position = new Vector2(0f, runner.transform.position.y + 3);
+			road.transform.position = new Vector2(0f, runner.transform.position.y + 3);
+			background.transform.position = new Vector2(0f, runner.transform.position.y + 3);
+
             platfotmTiles[pushBlockForward].transform.position = BlockPositioner(1.5f);
             pushBlockForward = (pushBlockForward + 1 < platfotmTiles.Count) ? pushBlockForward += 1 : pushBlockForward = 0;
         }

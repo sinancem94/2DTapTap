@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Platform
   - Runner
+  - Block
+  - Lines
+  - Background
+  - Road
   layers:
   - Default
   - TransparentFX
@@ -15,11 +19,11 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Background
+  - Road
+  - Lines
+  - Blocks
+  - Runner
   - 
   - 
   - 
@@ -42,4 +46,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2966996503
+    locked: 0
+  - name: Road
+    uniqueID: 846834291
+    locked: 0
+  - name: Lines
+    uniqueID: 4174116889
+    locked: 0
+  - name: Blocks
+    uniqueID: 2841053541
+    locked: 0
+  - name: Runner
+    uniqueID: 2891553825
     locked: 0
