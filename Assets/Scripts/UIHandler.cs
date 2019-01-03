@@ -20,10 +20,9 @@ public class UIHandler : MonoBehaviour {
         this.transform.GetChild(1).gameObject.SetActive(true);
     }
 
-    public void StartAgain()
+    public void Restart()
     {
-        Debug.Log("tusa bastım");
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("GameScene",LoadSceneMode.Single);
     }
 	
 }

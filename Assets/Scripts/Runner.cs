@@ -8,10 +8,12 @@ public class Runner : MonoBehaviour {
     
     public float speed;
     private float timer;
+    private float gameTime;
 
     void Start () {
+        gameTime = 0f;
         timer = 4f;
-        speed = .05f;
+        speed = 4f;
         this.transform.position = Platform.instance.transform.GetChild(0).position;
 	}
 	
@@ -19,12 +21,18 @@ public class Runner : MonoBehaviour {
     {
         if(this.transform.position.y <= Platform.instance.platfotmTiles[Platform.instance.blockToSlide].transform.position.y - 1f)// && !Mathf.Approximately(platform.transform.GetChild(platform.GetComponent<Platform>().blockToSlide).position.y,0))
         {
-            this.transform.Translate(0f, speed, 0f, Space.World);
+            this.transform.Translate(0f, speed * Time.deltaTime, 0f, Space.World);
         }
-        if(Time.unscaledTime > timer)
+
+        //TODO: Add a speed changer to runner according to players tapping speed
+        if(Platform.instance.game.state == GameHandler.GameState.GameRunning)
         {
-            speed += .01f;
-            timer += 4f;
+            gameTime += Time.deltaTime;
+            if (gameTime > timer)
+            {
+                speed += .5f;
+                timer += 4f;
+            }
         }
 	}
 }
