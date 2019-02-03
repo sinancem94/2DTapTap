@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 143a1e7427f114adba666fb762323fe6, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -275,7 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.39215687}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -306,8 +306,8 @@ GameObject:
   m_Component:
   - component: {fileID: 196421828}
   - component: {fileID: 196421829}
-  m_Layer: 0
-  m_Name: Untagged
+  m_Layer: 10
+  m_Name: Lines
   m_TagString: Lines
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -320,12 +320,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 196421827}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
-  m_LocalScale: {x: 1, y: 30, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 3, z: 1}
   m_Children:
   - {fileID: 565386119}
   - {fileID: 392116944}
-  m_Father: {fileID: 369643771}
+  m_Father: {fileID: 369643770}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &196421829
@@ -360,18 +360,18 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a:1 }
+  m_SortingLayerID: -120850407
+  m_SortingLayer: 3
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: fa1c9d763927646ffab3081557c4ebf5, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &261983528
@@ -490,8 +490,7 @@ GameObject:
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 369643771}
-  - component: {fileID: 369643772}
+  - component: {fileID: 369643770}
   - component: {fileID: 369643773}
   m_Layer: 0
   m_Name: Platform(Player)
@@ -500,7 +499,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &369643771
+--- !u!4 &369643770
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -512,35 +511,10 @@ Transform:
   m_Children:
   - {fileID: 2125352536}
   - {fileID: 196421828}
-<<<<<<< HEAD:Assets/Scenes/GameScene.unity
-  - {fileID: 2120997776}
-=======
-  - {fileID: 570162058}
   - {fileID: 1036371629}
->>>>>>> master:Assets/Scenes/RunHelper.unity
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &369643772
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 369643769}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &369643773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,14 +526,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3d022568bec944b2be5e113d9bad4d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD:Assets/Scenes/GameScene.unity
-  runner: {fileID: 2120997774}
-  lines: {fileID: 196421827}
-=======
+  block: {fileID: 0}
   runner: {fileID: 0}
   lines: {fileID: 0}
+  road: {fileID: 0}
   background: {fileID: 0}
->>>>>>> master:Assets/Scenes/RunHelper.unity
   platfotmTiles: []
   BlockPos: []
   blockToSlide: 0
@@ -741,13 +712,8 @@ Camera:
   m_GameObject: {fileID: 546899192}
   m_Enabled: 1
   serializedVersion: 2
-<<<<<<< HEAD:Assets/Scenes/GameScene.unity
-  m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 0}
-=======
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
->>>>>>> master:Assets/Scenes/RunHelper.unity
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -760,7 +726,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 15
-  field of view: 112
+  field of view: 60
   orthographic: 1
   orthographic size: 6
   m_Depth: -1
@@ -772,7 +738,7 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
-  m_AllowMSAA: 0
+  m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
@@ -900,12 +866,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 570162057}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.3, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
-  m_Father: {fileID: 369643770}
-  m_RootOrder: 2
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &570162059
 SpriteRenderer:
@@ -964,8 +930,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d4cc6212d1dec24c8eb4bad78fa7f19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  changeAmount: 0.0003
-  waitTimer: 0.003
+  changeAmount: 0.005
+  waitTimer: 0
 --- !u!1 &684902627
 GameObject:
   m_ObjectHideFlags: 0
@@ -1074,7 +1040,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &755493147
 GameObject:
@@ -1169,10 +1135,10 @@ Transform:
   m_GameObject: {fileID: 1036371628}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1, y: 2, z: 1}
+  m_LocalScale: {x: 4.4, y: 20, z: 1}
   m_Children: []
   m_Father: {fileID: 369643770}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1036371630
 SpriteRenderer:
@@ -1209,7 +1175,7 @@ SpriteRenderer:
   m_SortingLayerID: 846834291
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2fcb0a839fbbd074bbf82afa4f0bd970, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e86712d68966645c89371bc95bdf8cde, type: 3}
   m_Color: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1220,6 +1186,72 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1076531388
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1076531390}
+  - component: {fileID: 1076531389}
+  m_Layer: 0
+  m_Name: Directional Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!108 &1076531389
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1076531388}
+  m_Enabled: 1
+  serializedVersion: 8
+  m_Type: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!4 &1076531390
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1076531388}
+  m_LocalRotation: {x: 0.9622502, y: -0.022557596, z: 0.2578341, w: 0.08418611}
+  m_LocalPosition: {x: 0.37792873, y: -4.0766597, z: 0.522707}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 170, y: -30, z: 0}
 --- !u!1 &1329914539
 GameObject:
   m_ObjectHideFlags: 0
@@ -1252,7 +1284,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.3, y: 0.3}
   m_AnchorMax: {x: 0.7, y: 0.4}
-  m_AnchoredPosition: {x: -0.000030517578, y: 0}
+  m_AnchoredPosition: {x: -0.000061035156, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1329914541
@@ -1550,11 +1582,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2033782069}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-<<<<<<< HEAD:Assets/Scenes/GameScene.unity
-  m_LocalPosition: {x: 0.15, y: -0.1, z: 0}
-=======
   m_LocalPosition: {x: 0.1, y: -0.1, z: 0}
->>>>>>> master:Assets/Scenes/RunHelper.unity
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2125352536}
@@ -1657,7 +1685,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1403413471
   m_SortingLayer: 5
-  m_SortingOrder: 3
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 475d59ba07003be4ba16709142fb81b2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1675,18 +1703,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2120997774}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -3, z: -3}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 1622251111}
-<<<<<<< HEAD:Assets/Scenes/GameScene.unity
-  m_Father: {fileID: 369643771}
-  m_RootOrder: 2
-=======
   m_Father: {fileID: 0}
   m_RootOrder: 1
->>>>>>> master:Assets/Scenes/RunHelper.unity
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2120997777
 MonoBehaviour:
@@ -1710,12 +1733,8 @@ GameObject:
   - component: {fileID: 2125352536}
   - component: {fileID: 2125352535}
   - component: {fileID: 2125352537}
-<<<<<<< HEAD:Assets/Scenes/GameScene.unity
   - component: {fileID: 2125352538}
-  m_Layer: 0
-=======
   m_Layer: 11
->>>>>>> master:Assets/Scenes/RunHelper.unity
   m_Name: Block
   m_TagString: Block
   m_Icon: {fileID: 0}
@@ -1805,4 +1824,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  blockSprite: {fileID: 0}
+  limit: 0

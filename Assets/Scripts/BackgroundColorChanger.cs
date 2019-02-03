@@ -9,30 +9,15 @@ public class BackgroundColorChanger : MonoBehaviour {
 	public float changeAmount;
 	public float waitTimer;
 	 
-
-	// Use this for initialization
-	void Start () {
-		
-		bgSpriteRenderer = GetComponent<SpriteRenderer> ();
+	void Start () 
+    {
+		bgSpriteRenderer = GetComponent<SpriteRenderer>();
 		bgColor = bgSpriteRenderer.color;
 		StartCoroutine (WaitAndChangeColor (changeAmount, waitTimer));
 	}
 
-
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-	/*void LateUpdate(){
-		Color newColor;
-
-		bgColor = bgSpriteRenderer.color;
-		newColor = hueChanger (bgColor, 0.1f);
-		bgSpriteRenderer.color = newColor;
-	}*/
-
-	private Color hueChanger(Color colortoChange, float hueIncrease){
+	private Color hueChanger(Color colortoChange, float hueIncrease)
+    {
 		float H, S, V;
 
 		Color.RGBToHSV (colortoChange, out H, out S, out V);
@@ -40,10 +25,11 @@ public class BackgroundColorChanger : MonoBehaviour {
 		return Color.HSVToRGB (H, S, V);
 	}
 
-	private  IEnumerator WaitAndChangeColor(float hueIncreaseEnum, float waitTime){
-		
-
-		while (true) {
+	private  IEnumerator WaitAndChangeColor(float hueIncreaseEnum, float waitTime)
+    {
+        yield return new WaitUntil(() => Platform.instance.game.state == GameHandler.GameState.GameRunning);
+        while (Platform.instance.game.state == GameHandler.GameState.GameRunning) 
+        {
 			Color newColor;
 			bgColor = bgSpriteRenderer.color;
 			newColor = hueChanger (bgColor, hueIncreaseEnum);

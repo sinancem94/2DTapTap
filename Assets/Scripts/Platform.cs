@@ -11,16 +11,18 @@ public class Platform : MonoBehaviour
 {
     private InputManager ınput;
     public GameHandler game;
+    private PlatformSizeHandler platformSizeHandler;
 
-    private GameObject block; //kırmızı bloklar
-    public GameObject runner;
+    public GameObject block; //kırmızı bloklar
+    public GameObject runner; //koşan arkadaş artık neyse
     public GameObject lines;
-	private GameObject road;
-	public GameObject background;
+	public GameObject road;//düz yol 
+	public GameObject background; //rengi değişen bok
 
     public List<GameObject> platfotmTiles; //blokları barındıran liste
 
     private float distance; //bi sonraki bloğun gelceği y mesafesi
+    private float distBetweenGap;
 
     public float[] BlockPos;
 
@@ -51,33 +53,45 @@ public class Platform : MonoBehaviour
 
         game = new GameHandler(GameHandler.GameState.BeginingPage);
 
+        platformSizeHandler = new PlatformSizeHandler();
+
 		block = GameObject.FindWithTag("Block");
         runner = GameObject.FindWithTag("Runner");
 		lines = GameObject.FindWithTag("Lines");
 		road = GameObject.FindWithTag("Road");
 		background = GameObject.FindWithTag("Background");
 
+        distBetweenGap = platformSizeHandler.ArrangeSize(road.transform,lines.transform,block.transform,runner.transform);
+
         lines.transform.position = new Vector2(0f, runner.transform.position.y + 7);
 		road.transform.position = new Vector2(0f, runner.transform.position.y + 7);
-		background.transform.position = new Vector2(0f, runner.transform.position.y + 7);
+		background.transform.position = new Vector2(0f, runner.transform.position.y + 5);
 
         platfotmTiles = new List<GameObject>();
         platfotmTiles.Add(block);
 
-        BlockPos = new float[] {-1.5f,1.5f};
-        distance = 0f;
+        BlockPos = new float[] {-distBetweenGap,distBetweenGap};
+        distance = -3f; // Start from -3
 
-        platfotmTiles[platfotmTiles.Count - 1].transform.position = new Vector2(0f,distance);
-        platfotmTiles.Add((GameObject)Instantiate(block, this.transform));
-        distance += 1.5f;
+        int levelStartStraightLine = 5;
+
         platfotmTiles[platfotmTiles.Count - 1].transform.position = new Vector2(0f, distance);
 
-        blockNum = 15;
+
+        for (int i = 0; i < levelStartStraightLine;i++)
+        {
+            distance += distBetweenGap;
+            platfotmTiles.Add((GameObject)Instantiate(block, this.transform));
+            platfotmTiles[platfotmTiles.Count - 1].transform.position = new Vector2(0f, distance);
+
+        }
+
+        blockNum = 10;
 
         for (int i = 0; i < blockNum; i++)
         {
             platfotmTiles.Add((GameObject)Instantiate(block, this.transform));
-            platfotmTiles[platfotmTiles.Count - 1].transform.position = BlockPositioner(1.5f);
+            platfotmTiles[platfotmTiles.Count - 1].transform.position = BlockPositioner(distBetweenGap);
         }
         blockToSlide = 0;
         pushBlockForward = 0;
@@ -92,7 +106,7 @@ public class Platform : MonoBehaviour
 			road.transform.position = new Vector2(0f, runner.transform.position.y + 3);
 			background.transform.position = new Vector2(0f, runner.transform.position.y + 3);
 
-            platfotmTiles[pushBlockForward].transform.position = BlockPositioner(1.5f);
+            platfotmTiles[pushBlockForward].transform.position = BlockPositioner(distBetweenGap);
 
             int r = Random.Range(0, 10);
             //Debug.Log(r);
@@ -125,11 +139,11 @@ public class Platform : MonoBehaviour
 
                 if(platfotmTiles[blockToSlide].GetComponent<BlockType>().type == BlockData.blockType.normal)
                 {
-                if (ınput.dirr == InputManager.direction.right)
+                    if (ınput.dirr == InputManager.direction.right)
                     {
                         if (Mathf.Approximately(platfotmTiles[blockToSlide].transform.position.x, BlockPos[1]))
                         {
-                            platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x - 1.5f, platfotmTiles[blockToSlide].transform.position.y);
+                            platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x - distBetweenGap, platfotmTiles[blockToSlide].transform.position.y);
                         }
                         else
                         {
@@ -143,7 +157,7 @@ public class Platform : MonoBehaviour
                     {
                         if (Mathf.Approximately(platfotmTiles[blockToSlide].transform.position.x, BlockPos[0]))
                         {
-                            platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x + 1.5f, platfotmTiles[blockToSlide].transform.position.y);
+                            platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x + distBetweenGap, platfotmTiles[blockToSlide].transform.position.y);
                         }
                         else
                         {
@@ -160,7 +174,7 @@ public class Platform : MonoBehaviour
                     {
                         if (Mathf.Approximately(platfotmTiles[blockToSlide].transform.position.x, BlockPos[0]))
                         {
-                            platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x + 1.5f, platfotmTiles[blockToSlide].transform.position.y);
+                            platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x + distBetweenGap, platfotmTiles[blockToSlide].transform.position.y);
                         }
                         else
                         {
@@ -174,7 +188,7 @@ public class Platform : MonoBehaviour
                     {
                         if (Mathf.Approximately(platfotmTiles[blockToSlide].transform.position.x, BlockPos[1]))
                         {
-                            platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x - 1.5f, platfotmTiles[blockToSlide].transform.position.y);
+                            platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x - distBetweenGap, platfotmTiles[blockToSlide].transform.position.y);
                         }
                         else
                         {
