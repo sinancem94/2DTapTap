@@ -1,11 +1,11 @@
 ﻿<Properties StartupConfiguration="{FA422BDE-FE0A-8386-DD8A-636E889ECC8E}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameHandler.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/UIHandler.cs">
     <Files>
       <File FileName="Assets/Scripts/Runner.cs" Line="22" Column="1" />
       <File FileName="Assets/Scripts/Platform.cs" Line="66" Column="1" />
       <File FileName="Assets/Scripts/GameHandler.cs" Line="30" Column="1" />
-      <File FileName="Assets/Scripts/UIHandler.cs" Line="11" Column="1" />
+      <File FileName="Assets/Scripts/UIHandler.cs" Line="23" Column="26" />
       <File FileName="Assets/Scripts/CameraMovement.cs" Line="17" Column="10" />
       <File FileName="Assets/Scripts/BlockScript/BlockFallAnimation.cs" Line="25" Column="6" />
       <File FileName="Assets/Scripts/BlockScript/BlockType.cs" Line="13" Column="51" />
