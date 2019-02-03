@@ -13,7 +13,7 @@ public class UIHandler : MonoBehaviour {
         this.transform.GetChild(1).gameObject.SetActive(false);
     }
 
-    //called from platform.gamehandler
+    //called from platform.gamehandler and runner
     public void GameOver()
     {
         Debug.Log("game over");

@@ -19,7 +19,7 @@ public class InputManager
     public void directionGetter()
     {
         direction dir = direction.none;
-       //#if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+#if UNITY_IOS && !UNITY_EDITOR
         if (Input.touchCount > 0)
         {
             Touch playerFinger = Input.touches[0];
@@ -43,7 +43,7 @@ public class InputManager
              }
          }
             
-//#elif UNITY_STANDALONE || UNITY_WEBPLAYER 
+#elif UNITY_EDITOR 
         if (Input.GetKeyDown("right"))
         {
             dir = direction.right;
@@ -58,7 +58,7 @@ public class InputManager
         {
             dir = direction.none;
         }
-//#endif
+#endif
     }
 }
 
