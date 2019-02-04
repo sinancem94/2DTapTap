@@ -12,6 +12,7 @@ public class Platform : MonoBehaviour
     private InputManager ınput;
     public GameHandler game;
     private PlatformSizeHandler platformSizeHandler;
+    private UIHandler uI;
 
     public GameObject block; //kırmızı bloklar
     public GameObject runner; //koşan arkadaş artık neyse
@@ -32,6 +33,8 @@ public class Platform : MonoBehaviour
 
     private int exRand = 3;
     private int sameLine = 0;
+
+    private int point;
 
     public int pushBlockForward; // sıranın en sonuna atılcak blok
 
@@ -55,6 +58,8 @@ public class Platform : MonoBehaviour
 
         platformSizeHandler = new PlatformSizeHandler();
 
+        uI = (UIHandler)FindObjectOfType(typeof(UIHandler));
+
 		block = GameObject.FindWithTag("Block");
         runner = GameObject.FindWithTag("Runner");
 		lines = GameObject.FindWithTag("Lines");
@@ -63,17 +68,17 @@ public class Platform : MonoBehaviour
 
         distBetweenBlock = platformSizeHandler.ArrangeSize(road.transform,lines.transform,block.transform,runner.transform);
 
-        lines.transform.position = new Vector2(0f, runner.transform.position.y + 7);
-		road.transform.position = new Vector2(0f, runner.transform.position.y + 7);
+        lines.transform.position = new Vector2(0f, runner.transform.position.y + (5 * distBetweenBlock));
+        road.transform.position = new Vector2(0f, runner.transform.position.y + (5 * distBetweenBlock));
 		//background.transform.position = new Vector2(0f, runner.transform.position.y + 5);
 
         platfotmTiles = new List<GameObject>();
         platfotmTiles.Add(block);
 
         BlockPos = new float[] {-distBetweenBlock,distBetweenBlock};
-        distance = -3f; // Start from -3
+        distance = -5f; // Start from -5
 
-        int levelStartStraightLine = 5;
+        int levelStartStraightLine = 7; // start from third block to give full road
 
         platfotmTiles[platfotmTiles.Count - 1].transform.position = new Vector2(0f, distance);
 
@@ -95,12 +100,14 @@ public class Platform : MonoBehaviour
         }
         blockToSlide = 0;
         pushBlockForward = 0;
+
+        point = 0;
     }
 
     //runner bloktan öndeyse bloğu ileri at + lines ı bir ileri taşı
     private void LateUpdate()
     {
-        if(runner.transform.position.y >= platfotmTiles[pushBlockForward].transform.position.y + 3f)
+        if(runner.transform.position.y >= platfotmTiles[pushBlockForward].transform.position.y + (3 * distBetweenBlock))
         {
             lines.transform.position = new Vector2(0f, runner.transform.position.y + 3);
 			road.transform.position = new Vector2(0f, runner.transform.position.y + 3);
@@ -108,14 +115,7 @@ public class Platform : MonoBehaviour
 
             platfotmTiles[pushBlockForward].transform.position = BlockPositioner(distBetweenBlock);
 
-            int r = Random.Range(0, 10);
-            //Debug.Log(r);
-
-            if (platfotmTiles[pushBlockForward].GetComponent<BlockType>().type == BlockData.blockType.reverse)
-                platfotmTiles[pushBlockForward].GetComponent<BlockType>().ChangeType();
-            //TODO: Create a random reverse generator that deals reverse positions 
-            else if (r < 2)
-                platfotmTiles[pushBlockForward].GetComponent<BlockType>().ChangeType();
+            platfotmTiles[pushBlockForward].GetComponent<Block>().SetBlock();
 
             pushBlockForward = (pushBlockForward + 1 < platfotmTiles.Count) ? pushBlockForward += 1 : pushBlockForward = 0;
         }
@@ -126,82 +126,103 @@ public class Platform : MonoBehaviour
     {
         if(game.state == GameHandler.GameState.GameRunning)
         {
-            if (Mathf.Approximately(platfotmTiles[blockToSlide].transform.position.x, 0f))
-            {
-                blockToSlide = (blockToSlide + 1 < platfotmTiles.Count) ? blockToSlide += 1 : blockToSlide = 0;
-            }
-
             ınput.directionGetter();
 
             if (ınput.directions.Count != 0)
             {
                 ınput.dirr = ınput.directions.Dequeue();
+                MoveTile();
+            }
 
-                if(platfotmTiles[blockToSlide].GetComponent<BlockType>().type == BlockData.blockType.normal)
-                {
-                    if (ınput.dirr == InputManager.direction.right)
-                    {
-                        if (Mathf.Approximately(platfotmTiles[blockToSlide].transform.position.x, BlockPos[1]))
-                        {
-                            platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x - distBetweenBlock, platfotmTiles[blockToSlide].transform.position.y);
-                        }
-                        else
-                        {
-                            game.GameOver();
-                            StartCoroutine(platfotmTiles[blockToSlide].GetComponent<BlockFallAnimation>().Fall(new Vector2(-1f, 0)));
-                            var uı = (UIHandler)FindObjectOfType(typeof(UIHandler));
-                            uı.GameOver();
-                        }
-                    }
-                    else if (ınput.dirr == InputManager.direction.left)
-                    {
-                        if (Mathf.Approximately(platfotmTiles[blockToSlide].transform.position.x, BlockPos[0]))
-                        {
-                            platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x + distBetweenBlock, platfotmTiles[blockToSlide].transform.position.y);
-                        }
-                        else
-                        {
-                            game.GameOver();
-                            StartCoroutine(platfotmTiles[blockToSlide].GetComponent<BlockFallAnimation>().Fall(new Vector2(1f, 0)));
-                            var uı = (UIHandler)FindObjectOfType(typeof(UIHandler));
-                            uı.GameOver();
-                        }
-                    }
-                }
-                else
-                {
-                    if (ınput.dirr == InputManager.direction.right)
-                    {
-                        if (Mathf.Approximately(platfotmTiles[blockToSlide].transform.position.x, BlockPos[0]))
-                        {
-                            platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x + distBetweenBlock, platfotmTiles[blockToSlide].transform.position.y);
-                        }
-                        else
-                        {
-                            game.GameOver();
-                            StartCoroutine(platfotmTiles[blockToSlide].GetComponent<BlockFallAnimation>().Fall(new Vector2(1f, 0)));
-                            var uı = (UIHandler)FindObjectOfType(typeof(UIHandler));
-                            uı.GameOver();
-                        }
-                    }
-                    else if (ınput.dirr == InputManager.direction.left)
-                    {
-                        if (Mathf.Approximately(platfotmTiles[blockToSlide].transform.position.x, BlockPos[1]))
-                        {
-                            platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x - distBetweenBlock, platfotmTiles[blockToSlide].transform.position.y);
-                        }
-                        else
-                        {
-                            game.GameOver();
-                            StartCoroutine(platfotmTiles[blockToSlide].GetComponent<BlockFallAnimation>().Fall(new Vector2(-1f, 0)));
-                            var uı = (UIHandler)FindObjectOfType(typeof(UIHandler));
-                            uı.GameOver();
-                        }
-                    }
-                }
-
+            if (Mathf.Approximately(platfotmTiles[blockToSlide].transform.position.x, 0f))
+            {
+                blockToSlide = (blockToSlide + 1 < platfotmTiles.Count) ? blockToSlide += 1 : blockToSlide = 0;
             }
         }
+    }
+
+
+    private void MoveTile()
+    {
+        if (platfotmTiles[blockToSlide].GetComponent<Block>().type == BlockData.blockType.normal)
+        {
+            if (ınput.dirr == InputManager.direction.right)
+            {
+                if (Mathf.Approximately(platfotmTiles[blockToSlide].transform.position.x, BlockPos[1])) // if pressed right and next tile is on right
+                {
+                    StartCoroutine(platfotmTiles[blockToSlide].GetComponent<BlockAnimation>().MoveTile(0));
+                    blockToSlide = (blockToSlide + 1 < platfotmTiles.Count) ? blockToSlide += 1 : blockToSlide = 0;
+                    point++;
+                    uI.SetPoint(point);
+                    //platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x - distBetweenBlock, platfotmTiles[blockToSlide].transform.position.y);
+                }
+                else // if pressed Right but tile is on left
+                {
+                    game.GameOver();
+                    StartCoroutine(platfotmTiles[blockToSlide].GetComponent<BlockAnimation>().Fall(new Vector2(-1f, 0)));
+
+                    uI.GameOver();
+                }
+            }
+            else if (ınput.dirr == InputManager.direction.left)
+            {
+                if (Mathf.Approximately(platfotmTiles[blockToSlide].transform.position.x, BlockPos[0])) // if pressed left and tile is on left
+                {
+                    StartCoroutine(platfotmTiles[blockToSlide].GetComponent<BlockAnimation>().MoveTile(0));
+                    blockToSlide = (blockToSlide + 1 < platfotmTiles.Count) ? blockToSlide += 1 : blockToSlide = 0;
+                    point++;
+                    uI.SetPoint(point);
+                    //platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x + distBetweenBlock, platfotmTiles[blockToSlide].transform.position.y);
+                }
+                else // if pressed left but tile is on right
+                {
+                    game.GameOver();
+                    StartCoroutine(platfotmTiles[blockToSlide].GetComponent<BlockAnimation>().Fall(new Vector2(1f, 0)));
+                   
+                    uI.GameOver();
+                }
+            }
+        }
+        else // if block is reverse 
+        {
+            if (ınput.dirr == InputManager.direction.right)
+            {
+                if (Mathf.Approximately(platfotmTiles[blockToSlide].transform.position.x, BlockPos[0])) // if pressed right tile is on left
+                {
+                    StartCoroutine(platfotmTiles[blockToSlide].GetComponent<BlockAnimation>().MoveTile(0));
+                    blockToSlide = (blockToSlide + 1 < platfotmTiles.Count) ? blockToSlide += 1 : blockToSlide = 0;
+                    point++;
+                    uI.SetPoint(point);
+                    //platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x + distBetweenBlock, platfotmTiles[blockToSlide].transform.position.y);
+                }
+                else // if pressed right but reverse worng
+                {
+                    game.GameOver();
+                    StartCoroutine(platfotmTiles[blockToSlide].GetComponent<BlockAnimation>().Fall(new Vector2(1f, 0)));
+                   
+                    uI.GameOver();
+                }
+            }
+            else if (ınput.dirr == InputManager.direction.left) // if pressed left tile is on right
+            {
+                if (Mathf.Approximately(platfotmTiles[blockToSlide].transform.position.x, BlockPos[1]))
+                {
+                    StartCoroutine(platfotmTiles[blockToSlide].GetComponent<BlockAnimation>().MoveTile(0));
+                    blockToSlide = (blockToSlide + 1 < platfotmTiles.Count) ? blockToSlide += 1 : blockToSlide = 0;
+                    point++;
+                    uI.SetPoint(point);
+                    //platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x - distBetweenBlock, platfotmTiles[blockToSlide].transform.position.y);
+                }
+                else // if pressed left but reverse worng
+                {
+                    game.GameOver();
+                    StartCoroutine(platfotmTiles[blockToSlide].GetComponent<BlockAnimation>().Fall(new Vector2(-1f, 0)));
+
+                    uI.GameOver();
+                }
+            }
+        }
+
     }
 
     // blokları konumlandıran fonksiyon
@@ -213,7 +234,6 @@ public class Platform : MonoBehaviour
         distance += rate;
 
         return new Vector2(BlockPos[exRand], distance);
-
     }
 
 }

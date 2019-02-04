@@ -17,19 +17,39 @@ public class BlockData
     };
 
     //Changes block type whether its a normal block or reverse block
-    public static void ChangeBlockType(ref blockType type,SpriteRenderer blockSprite)
+    public static void ChangeBlockType(ref blockType type,List<SpriteRenderer> blockSprites /*,SpriteRenderer blockSprite ,SpriteRenderer childBlockSprite*/)
     {
         if (type == blockType.normal)
         {
             type = blockType.reverse;
-            blockSprite.sprite = reverseBlock;
+
+            foreach(SpriteRenderer sp in blockSprites)
+            {
+                sp.sprite = reverseBlock;
+                sp.color = reverseColor;
+            }
+
+           /* blockSprite.sprite = reverseBlock;
             blockSprite.color = reverseColor;
+
+            childBlockSprite.sprite = reverseBlock;
+            childBlockSprite.color = reverseColor; */
         }
         else
         {
             type = blockType.normal;
-            blockSprite.sprite = normalBlock;
+
+            foreach (SpriteRenderer sp in blockSprites)
+            {
+                sp.sprite = normalBlock;
+                sp.color = normalColor;
+            }
+
+           /* blockSprite.sprite = normalBlock;
             blockSprite.color = normalColor;
+
+            childBlockSprite.sprite = normalBlock;
+            childBlockSprite.color = normalColor; */
         }
     }
 }

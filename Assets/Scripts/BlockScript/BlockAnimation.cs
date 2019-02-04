@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlockFallAnimation : MonoBehaviour {
+public class BlockAnimation : MonoBehaviour {
 
     public IEnumerator Fall(Vector2 distance)
     {
-
         this.transform.Translate(distance, Space.World);
         Vector3 xshrink = new Vector2(-0.1f, 0f);
         Vector3 yshrink = new Vector2(0f, -0.1f);
@@ -24,6 +23,30 @@ public class BlockFallAnimation : MonoBehaviour {
         this.gameObject.SetActive(false);
     }
 
+    public IEnumerator MoveTile(float toPosition)
+    {
+        float distance = toPosition - this.transform.position.x;
+        Vector3 translationVector = new Vector3(distance, 0f, 0f);
+
+        bool slided = false;
+
+        int from = (distance < 0) ? -1 : 1;
+
+        while(!slided)
+        {
+            this.transform.position += translationVector * 0.15f;
+            distance = toPosition - this.transform.position.x;
+
+            if((from == 1 && distance < toPosition ) || (from == -1 && distance > toPosition))
+            {
+                slided = true;
+            }
+
+            yield return new WaitForSeconds(0.01f);
+        }
+        this.transform.position = new Vector3(0f,transform.position.y,0f);
+
+    }
 
     /*private Sprite blockSprite;
 

@@ -14,7 +14,7 @@ public class Runner : MonoBehaviour {
         gameTime = 0f;
         timer = 4f;
         speed = 4f;
-        this.transform.position = Platform.instance.transform.GetChild(0).position;
+        this.transform.position = Platform.instance.platfotmTiles[2].transform.position; // start from 3rd tile
 	}
 	
 	void Update () 
