@@ -2,28 +2,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour {
 
+    Text point;
+    GameObject StartingPanel;
+    GameObject EndingPanel;
     //called from starting button.
+
+
+    public void SetPoint(int pnt)
+    {
+        point.text = pnt.ToString();
+    }
+
     public void StartGame()
     {
         Platform.instance.game.StartGame();
-        this.transform.GetChild(0).gameObject.SetActive(false);
-        this.transform.GetChild(1).gameObject.SetActive(false);
+        StartingPanel = this.transform.GetChild(0).gameObject;
+        StartingPanel.SetActive(false);
+        EndingPanel = this.transform.GetChild(1).gameObject;
+        EndingPanel.SetActive(false);
+
+        point = this.transform.GetChild(2).GetComponent<Text>();
     }
 
-    //called from platform.gamehandler
+    //called from platform.gamehandler and runner
     public void GameOver()
     {
         Debug.Log("game over");
-        this.transform.GetChild(1).gameObject.SetActive(true);
+        EndingPanel.SetActive(true);
     }
 
-    public void StartAgain()
+    public void Restart()
     {
-        Debug.Log("tusa bastım");
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("RunHelper",LoadSceneMode.Single);
     }
 	
 }

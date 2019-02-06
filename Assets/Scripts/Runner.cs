@@ -8,23 +8,30 @@ public class Runner : MonoBehaviour {
     
     public float speed;
     private float timer;
+    private float gameTime;
 
     void Start () {
+        gameTime = 0f;
         timer = 4f;
-        speed = .05f;
-        this.transform.position = Platform.instance.transform.GetChild(0).position;
+        speed = 4f;
+        this.transform.position = Platform.instance.platfotmTiles[2].transform.position; // start from 3rd tile
 	}
 	
 	void Update () 
     {
-        if(this.transform.position.y <= Platform.instance.platfotmTiles[Platform.instance.blockToSlide].transform.position.y - 1f)// && !Mathf.Approximately(platform.transform.GetChild(platform.GetComponent<Platform>().blockToSlide).position.y,0))
+        if(Platform.instance.game.state == GameHandler.GameState.GameRunning)
         {
-            this.transform.Translate(0f, speed, 0f, Space.World);
-        }
-        if(Time.unscaledTime > timer)
-        {
-            speed += .01f;
-            timer += 4f;
+            if (this.transform.position.y <= Platform.instance.platfotmTiles[Platform.instance.blockToSlide].transform.position.y - 1f)// && !Mathf.Approximately(platform.transform.GetChild(platform.GetComponent<Platform>().blockToSlide).position.y,0))
+            {
+                this.transform.Translate(0f, speed * Time.deltaTime, 0f, Space.World);
+            }
+            //TODO: Add a speed changer to runner according to players tapping speed
+            gameTime += Time.deltaTime;
+            if (gameTime > timer)
+            {
+                speed += .5f;
+                timer += 4f;
+            }
         }
 	}
 }
