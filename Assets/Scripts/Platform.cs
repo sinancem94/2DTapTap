@@ -9,10 +9,13 @@ Blokları yaratıyor, konumlandırıyor input alarak kaydırıp yanlış input g
 
 public class Platform : MonoBehaviour
 {
+	
+
     private InputManager ınput;
     public GameHandler game;
     private PlatformSizeHandler platformSizeHandler;
     private UIHandler uI;
+	private ExplosionParticleSystem explosionParticleSystem;
 
     public GameObject block; //kırmızı bloklar
     public GameObject runner; //koşan arkadaş artık neyse
@@ -59,6 +62,8 @@ public class Platform : MonoBehaviour
         platformSizeHandler = new PlatformSizeHandler();
 
         uI = (UIHandler)FindObjectOfType(typeof(UIHandler));
+
+		explosionParticleSystem = (ExplosionParticleSystem)FindObjectOfType (typeof(ExplosionParticleSystem));
 
 		block = GameObject.FindWithTag("Block");
         runner = GameObject.FindWithTag("Runner");
@@ -150,6 +155,8 @@ public class Platform : MonoBehaviour
             {
                 if (Mathf.Approximately(platfotmTiles[blockToSlide].transform.position.x, BlockPos[1])) // if pressed right and next tile is on right
                 {
+					explosionParticleSystem.Explode (platfotmTiles[blockToSlide].transform.position);
+
                     StartCoroutine(platfotmTiles[blockToSlide].GetComponent<BlockAnimation>().MoveTile(0));
                     blockToSlide = (blockToSlide + 1 < platfotmTiles.Count) ? blockToSlide += 1 : blockToSlide = 0;
                     point++;
@@ -168,6 +175,8 @@ public class Platform : MonoBehaviour
             {
                 if (Mathf.Approximately(platfotmTiles[blockToSlide].transform.position.x, BlockPos[0])) // if pressed left and tile is on left
                 {
+					explosionParticleSystem.Explode (platfotmTiles[blockToSlide].transform.position);
+
                     StartCoroutine(platfotmTiles[blockToSlide].GetComponent<BlockAnimation>().MoveTile(0));
                     blockToSlide = (blockToSlide + 1 < platfotmTiles.Count) ? blockToSlide += 1 : blockToSlide = 0;
                     point++;
@@ -189,6 +198,8 @@ public class Platform : MonoBehaviour
             {
                 if (Mathf.Approximately(platfotmTiles[blockToSlide].transform.position.x, BlockPos[0])) // if pressed right tile is on left
                 {
+					explosionParticleSystem.Explode (platfotmTiles[blockToSlide].transform.position);
+
                     StartCoroutine(platfotmTiles[blockToSlide].GetComponent<BlockAnimation>().MoveTile(0));
                     blockToSlide = (blockToSlide + 1 < platfotmTiles.Count) ? blockToSlide += 1 : blockToSlide = 0;
                     point++;
@@ -207,6 +218,8 @@ public class Platform : MonoBehaviour
             {
                 if (Mathf.Approximately(platfotmTiles[blockToSlide].transform.position.x, BlockPos[1]))
                 {
+					explosionParticleSystem.Explode (platfotmTiles[blockToSlide].transform.position);
+
                     StartCoroutine(platfotmTiles[blockToSlide].GetComponent<BlockAnimation>().MoveTile(0));
                     blockToSlide = (blockToSlide + 1 < platfotmTiles.Count) ? blockToSlide += 1 : blockToSlide = 0;
                     point++;
