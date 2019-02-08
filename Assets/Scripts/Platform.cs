@@ -161,6 +161,8 @@ public class Platform : MonoBehaviour
                     blockToSlide = (blockToSlide + 1 < platfotmTiles.Count) ? blockToSlide += 1 : blockToSlide = 0;
                     point++;
                     uI.SetPoint(point);
+
+					platfotmTiles [blockToSlide].gameObject.SetActive (false); // blow up the block
                     //platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x - distBetweenBlock, platfotmTiles[blockToSlide].transform.position.y);
                 }
                 else // if pressed Right but tile is on left
@@ -181,6 +183,8 @@ public class Platform : MonoBehaviour
                     blockToSlide = (blockToSlide + 1 < platfotmTiles.Count) ? blockToSlide += 1 : blockToSlide = 0;
                     point++;
                     uI.SetPoint(point);
+
+					platfotmTiles [blockToSlide ].gameObject.SetActive (false); // blow up the block
                     //platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x + distBetweenBlock, platfotmTiles[blockToSlide].transform.position.y);
                 }
                 else // if pressed left but tile is on right
@@ -204,6 +208,8 @@ public class Platform : MonoBehaviour
                     blockToSlide = (blockToSlide + 1 < platfotmTiles.Count) ? blockToSlide += 1 : blockToSlide = 0;
                     point++;
                     uI.SetPoint(point);
+
+					platfotmTiles [blockToSlide].gameObject.SetActive (false); // blow up the block
                     //platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x + distBetweenBlock, platfotmTiles[blockToSlide].transform.position.y);
                 }
                 else // if pressed right but reverse worng
@@ -224,6 +230,8 @@ public class Platform : MonoBehaviour
                     blockToSlide = (blockToSlide + 1 < platfotmTiles.Count) ? blockToSlide += 1 : blockToSlide = 0;
                     point++;
                     uI.SetPoint(point);
+
+					platfotmTiles [blockToSlide].gameObject.SetActive (false); // blow up the block
                     //platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x - distBetweenBlock, platfotmTiles[blockToSlide].transform.position.y);
                 }
                 else // if pressed left but reverse worng
