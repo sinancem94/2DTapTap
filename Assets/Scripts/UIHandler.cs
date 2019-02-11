@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,6 +9,7 @@ public class UIHandler : MonoBehaviour {
     Text point;
     GameObject StartingPanel;
     GameObject EndingPanel;
+    public Button modeButton;
     //called from starting button.
 
 
@@ -37,7 +38,24 @@ public class UIHandler : MonoBehaviour {
 
     public void Restart()
     {
+        Data.isAngled = false;//for mode change kaldırılcak
         SceneManager.LoadScene("RunHelper",LoadSceneMode.Single);
     }
 	
+    public void ChangeMode() //for mode
+    {
+        if(!Data.isAngled)
+        {
+            Data.isAngled = true;
+            modeButton.GetComponentInChildren<Text>().text = "açılı";
+            Platform.instance.ChangeMode();
+        }
+        else
+        {
+            Data.isAngled = false;
+            modeButton.GetComponentInChildren<Text>().text = "açısız";
+            Platform.instance.ChangeMode();
+        }
+
+    }
 }

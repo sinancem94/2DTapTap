@@ -1,25 +1,23 @@
 ﻿<Properties StartupConfiguration="{FA422BDE-FE0A-8386-DD8A-636E889ECC8E}|">
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/UIHandler.cs">
     <Files>
-      <File FileName="Assets/Scripts/Runner.cs" Line="17" Column="112" />
-      <File FileName="Assets/Scripts/Platform.cs" Line="213" Column="38" />
-      <File FileName="Assets/Scripts/GameHandler.cs" Line="30" Column="1" />
-      <File FileName="Assets/Scripts/UIHandler.cs" Line="27" Column="9" />
-      <File FileName="Assets/Scripts/BlockScript/BlockData.cs" Line="20" Column="157" />
-      <File FileName="Assets/Scripts/InputManager.cs" Line="10" Column="95" />
-      <File FileName="Assets/Scripts/RandomPos.cs" Line="11" Column="53" />
-      <File FileName="Assets/Resources/SpriteGlow/SpriteGlowEffect.cs" Line="27" Column="81" />
-      <File FileName="Assets/Resources/SpriteGlow/SpriteGlowMaterial.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/SpriteGlow/SpriteOutline.shader" Line="18" Column="35" />
-      <File FileName="Assets/Scripts/BlockScript/BlockAnimation.cs" Line="37" Column="64" />
-      <File FileName="Assets/Scripts/BlockScript/Block.cs" Line="95" Column="73" />
+      <File FileName="Assets/Scripts/ScreenSizeHandling/PlatformSizeHandler.cs" Line="8" Column="21" />
+      <File FileName="Assets/Scripts/ScreenSizeHandling/SizeHandler.cs" Line="8" Column="66" />
+      <File FileName="Assets/Scripts/ScreenSizeHandling/CameraSizeHandler.cs" Line="29" Column="38" />
+      <File FileName="Assets/Scripts/Platform.cs" Line="172" Column="100" />
+      <File FileName="Assets/Scripts/CameraMovement/CameraMovement.cs" Line="14" Column="34" />
+      <File FileName="Assets/Scripts/Data.cs" Line="7" Column="29" />
+      <File FileName="Assets/Scripts/Runner.cs" Line="24" Column="57" />
+      <File FileName="Assets/Scripts/GameHandler.cs" Line="26" Column="32" />
+      <File FileName="Assets/Scripts/BlockScript/BlockAnimation.cs" Line="51" Column="6" />
+      <File FileName="Assets/Scripts/UIHandler.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
 </Properties>

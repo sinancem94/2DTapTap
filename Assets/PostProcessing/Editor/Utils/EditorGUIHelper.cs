@@ -159,10 +159,10 @@ namespace UnityEditor.PostProcessing
 
         static void CopySettings(SerializedProperty settings)
         {
-            var t = typeof(PostProcessingProfile);
+           /* var t = typeof(PostProcessingProfile);
             var settingsStruct = ReflectionUtils.GetFieldValueFromPath(settings.serializedObject.targetObject, ref t, settings.propertyPath);
             var serializedString = t.ToString() + '|' + JsonUtility.ToJson(settingsStruct);
-            EditorGUIUtility.systemCopyBuffer = serializedString;
+            EditorGUIUtility.systemCopyBuffer = serializedString;*/
         }
 
         static bool CanPaste(SerializedProperty settings)
@@ -183,12 +183,12 @@ namespace UnityEditor.PostProcessing
 
         static void PasteSettings(SerializedProperty settings)
         {
-            Undo.RecordObject(settings.serializedObject.targetObject, "Paste effect settings");
+           /* Undo.RecordObject(settings.serializedObject.targetObject, "Paste effect settings");
             var field = ReflectionUtils.GetFieldInfoFromPath(settings.serializedObject.targetObject, settings.propertyPath);
             var json = EditorGUIUtility.systemCopyBuffer.Substring(field.FieldType.ToString().Length + 1);
             var obj = JsonUtility.FromJson(json, field.FieldType);
             var parent = ReflectionUtils.GetParentObject(settings.propertyPath, settings.serializedObject.targetObject);
-            field.SetValue(parent, obj, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance, null, CultureInfo.CurrentCulture);
+            field.SetValue(parent, obj, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance, null, CultureInfo.CurrentCulture);*/
         }
     }
 }

@@ -32,6 +32,8 @@ public class BlockAnimation : MonoBehaviour {
 
         int from = (distance < 0) ? -1 : 1;
 
+        Debug.Log("lollls");
+
         while(!slided)
         {
             this.transform.position += translationVector * 0.15f;

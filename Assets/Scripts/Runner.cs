@@ -14,14 +14,14 @@ public class Runner : MonoBehaviour {
         gameTime = 0f;
         timer = 4f;
         speed = 4f;
-        this.transform.position = Platform.instance.platfotmTiles[2].transform.position; // start from 3rd tile
+       // this.transform.position = Platform.instance.platfotmTiles[5].transform.position; // start from 3rd tile // platform da yapılıyor ki aradaki fark hemen hesaplanabilsin
 	}
 	
 	void Update () 
     {
         if(Platform.instance.game.state == GameHandler.GameState.GameRunning)
         {
-            if (this.transform.position.y <= Platform.instance.platfotmTiles[Platform.instance.blockToSlide].transform.position.y - 1f)// && !Mathf.Approximately(platform.transform.GetChild(platform.GetComponent<Platform>().blockToSlide).position.y,0))
+            if (Platform.instance.straightRoadLenght >= 1f)// && !Mathf.Approximately(platform.transform.GetChild(platform.GetComponent<Platform>().blockToSlide).position.y,0))
             {
                 this.transform.Translate(0f, speed * Time.deltaTime, 0f, Space.World);
             }

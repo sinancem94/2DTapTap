@@ -422,7 +422,7 @@ namespace UnityEngine.PostProcessing
         {
             var bakedLut = model.bakedLut;
             var rect = new Rect(context.viewport.x * Screen.width + 8f, 8f, bakedLut.width, bakedLut.height);
-            GUI.DrawTexture(rect, bakedLut);
+            UnityEngine.GUI.DrawTexture(rect, bakedLut);
         }
 
         public override void OnDisable()
