@@ -22,8 +22,8 @@ public class Platform : MonoBehaviour
 
     public List<GameObject> platfotmTiles; //blokları barındıran liste
 
-    private float distance; //bi sonraki bloğun gelceği y mesafesi
-    private float distBetweenBlock; //bloklar arası x mesafesi
+    private float distance; //bi sonraki bloğun gelceği y mesafesi.  habire artıyor
+    public float distBetweenBlock; //bloklar arası x mesafesi
 
     public float[] BlockPos; // blokların oluşailceği pozisyonlar
 
@@ -35,6 +35,7 @@ public class Platform : MonoBehaviour
     private int sameLine = 0;
 
     private int point;
+    public int gainedPoint;
 
     public int pushBlockForward; // sıranın en sonuna atılcak blok. en arkada kalan blok
 
@@ -120,6 +121,7 @@ public class Platform : MonoBehaviour
         Debug.Log("Initial length is : " + initialStraightRoadLenght);
 
         point = 0;
+        gainedPoint = 1;
     }
 
     //runner bloktan öndeyse bloğu ileri at + lines ı bir ileri taşı
@@ -153,6 +155,7 @@ public class Platform : MonoBehaviour
             }
 
             straightRoadLenght = platfotmTiles[blockToSlide].transform.position.y - runner.transform.position.y; // camera ve kombo için uzaklık hesapla
+
             //Debug.Log(straightRoadLenght);
 
             /*if (Mathf.Approximately(platfotmTiles[blockToSlide].transform.position.x, 0f)) //kaycak bloğa karar veriyor. MoveTile de kayar kaymaz yapılıyor artık
@@ -174,7 +177,7 @@ public class Platform : MonoBehaviour
                 {
                     StartCoroutine(platfotmTiles[blockToSlide].GetComponent<BlockAnimation>().MoveTile(0));
                     blockToSlide = (blockToSlide + 1 < platfotmTiles.Count) ? blockToSlide += 1 : blockToSlide = 0;
-                    point++;
+                    point += gainedPoint;
                     uI.SetPoint(point);
                     //platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x - distBetweenBlock, platfotmTiles[blockToSlide].transform.position.y);
                 }
@@ -192,7 +195,7 @@ public class Platform : MonoBehaviour
                 {
                     StartCoroutine(platfotmTiles[blockToSlide].GetComponent<BlockAnimation>().MoveTile(0));
                     blockToSlide = (blockToSlide + 1 < platfotmTiles.Count) ? blockToSlide += 1 : blockToSlide = 0;
-                    point++;
+                    point += gainedPoint;
                     uI.SetPoint(point);
                     //platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x + distBetweenBlock, platfotmTiles[blockToSlide].transform.position.y);
                 }
@@ -213,7 +216,7 @@ public class Platform : MonoBehaviour
                 {
                     StartCoroutine(platfotmTiles[blockToSlide].GetComponent<BlockAnimation>().MoveTile(0));
                     blockToSlide = (blockToSlide + 1 < platfotmTiles.Count) ? blockToSlide += 1 : blockToSlide = 0;
-                    point++;
+                    point += gainedPoint;
                     uI.SetPoint(point);
                     //platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x + distBetweenBlock, platfotmTiles[blockToSlide].transform.position.y);
                 }
@@ -231,7 +234,7 @@ public class Platform : MonoBehaviour
                 {
                     StartCoroutine(platfotmTiles[blockToSlide].GetComponent<BlockAnimation>().MoveTile(0));
                     blockToSlide = (blockToSlide + 1 < platfotmTiles.Count) ? blockToSlide += 1 : blockToSlide = 0;
-                    point++;
+                    point += gainedPoint;
                     uI.SetPoint(point);
                     //platfotmTiles[blockToSlide].transform.position = new Vector2(platfotmTiles[blockToSlide].transform.position.x - distBetweenBlock, platfotmTiles[blockToSlide].transform.position.y);
                 }
@@ -279,6 +282,12 @@ public class Platform : MonoBehaviour
             //Camera.main.gameObject.transform.position = new Vector3(0f, 6f, 0f);
         }
 
+    }
+
+
+    public void GiveMessage(float time,string message)
+    {
+        StartCoroutine(uI.GiveInfo(time,message));
     }
 
 }

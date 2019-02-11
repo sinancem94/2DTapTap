@@ -31,8 +31,10 @@ public class CameraSizeHandler : SizeHandler {
             {
                 //Debug.Log("genişlicek bu kadar : " + (camDiffUpperBounds * ((Platform.instance.straightRoadLenght - roadMiddleReferencePoint) / (roadLenghtUpperLimit - roadMiddleReferencePoint))));
 
+                // ne kadar genişlemesi gerektiği
                 float newCamSize  = camSize + (camDiffUpperBounds * ((Platform.instance.straightRoadLenght - roadMiddleReferencePoint) / (roadLenghtUpperLimit - roadMiddleReferencePoint)));
 
+                //ona doğru git
                 if(Camera.main.fieldOfView <  newCamSize)
                 {
                     Camera.main.fieldOfView += 0.1f;
@@ -48,8 +50,10 @@ public class CameraSizeHandler : SizeHandler {
             {
                 //Debug.Log("daralcak  bu kadar : " + (camDiffLowBounds * ((roadMiddleReferencePoint - Platform.instance.straightRoadLenght) / (roadMiddleReferencePoint - roadLengthLowerLimit))));
 
+                // ne kadar daralması gerektiği
                 float newCamSize = camSize - (camDiffLowBounds * ((roadMiddleReferencePoint - Platform.instance.straightRoadLenght) / (roadMiddleReferencePoint - roadLengthLowerLimit)));
 
+                //ona doğru git
                 if(Camera.main.fieldOfView > newCamSize)
                 {
                     Camera.main.fieldOfView -= 0.1f;
