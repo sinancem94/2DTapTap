@@ -1,17 +1,16 @@
 ﻿<Properties StartupConfiguration="{FA422BDE-FE0A-8386-DD8A-636E889ECC8E}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/BlockScript/Block.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Platform.cs">
     <Files>
-      <File FileName="Assets/Scripts/ScreenSizeHandling/PlatformSizeHandler.cs" Line="8" Column="21" />
-      <File FileName="Assets/Scripts/ScreenSizeHandling/SizeHandler.cs" Line="8" Column="66" />
-      <File FileName="Assets/Scripts/ScreenSizeHandling/CameraSizeHandler.cs" Line="37" Column="32" />
-      <File FileName="Assets/Scripts/CameraMovement/CameraMovement.cs" Line="16" Column="18" />
-      <File FileName="Assets/Scripts/Data.cs" Line="7" Column="29" />
-      <File FileName="Assets/Scripts/GameHandler.cs" Line="24" Column="17" />
-      <File FileName="Assets/Scripts/BlockScript/BlockAnimation.cs" Line="33" Column="44" />
-      <File FileName="Assets/Scripts/UIHandler.cs" Line="23" Column="32" />
-      <File FileName="Assets/Scripts/Runner.cs" Line="39" Column="139" />
-      <File FileName="Assets/Scripts/Platform.cs" Line="237" Column="42" />
-      <File FileName="Assets/Scripts/BlockScript/Block.cs" Line="34" Column="9" />
+      <File FileName="Assets/Scripts/ScreenSizeHandling/PlatformSizeHandler.cs" Line="30" Column="45" />
+      <File FileName="Assets/Scripts/ScreenSizeHandling/SizeHandler.cs" Line="8" Column="2" />
+      <File FileName="Assets/Scripts/CameraMovement/CameraMovement.cs" Line="16" Column="3" />
+      <File FileName="Assets/Scripts/BlockScript/BlockAnimation.cs" Line="33" Column="29" />
+      <File FileName="Assets/Scripts/UIHandler.cs" Line="44" Column="1" />
+      <File FileName="Assets/Scripts/Runner.cs" Line="19" Column="2" />
+      <File FileName="Assets/Scripts/Platform.cs" Line="15" Column="1" />
+      <File FileName="Assets/Scripts/BlockScript/Block.cs" Line="35" Column="29" />
+      <File FileName="Assets/Scripts/RandomPos.cs" Line="10" Column="1" />
+      <File FileName="Assets/Scripts/ScreenSizeHandling/CameraSizeHandler.cs" Line="17" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
